@@ -9,14 +9,14 @@ metadata:
     heritage: "Helm"
     release: "datadog"
   name: datadog-cluster-agent
-  namespace: default
+  namespace: monitoring
 ---
 # Source: datadog/templates/secret-api-key.yaml
 apiVersion: v1
 kind: Secret
 metadata:
   name: datadog
-  namespace: default
+  namespace: monitoring
   labels: {}
 type: Opaque
 data:
@@ -27,7 +27,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: datadog-cluster-agent
-  namespace: default
+  namespace: monitoring
   labels: {}
 type: Opaque
 data:
@@ -38,7 +38,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: datadog-cluster-agent-confd
-  namespace: default
+  namespace: monitoring
   labels: {}
   annotations: {}
 data:
@@ -76,7 +76,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: datadog-installinfo
-  namespace: default
+  namespace: monitoring
   labels: {}
   annotations: {}
 data:
@@ -92,7 +92,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: datadog-system-probe-config
-  namespace: default
+  namespace: monitoring
   labels: {}
 data:
   system-probe.yaml: |
@@ -138,7 +138,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: datadog-security
-  namespace: default
+  namespace: monitoring
   labels: {}
 data:
   system-probe-seccomp.json: |
@@ -645,7 +645,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: datadog-cluster-agent
-    namespace: default
+    namespace: monitoring
 ---
 # Source: datadog/templates/kube-state-metrics-core-rbac.yaml
 apiVersion: "rbac.authorization.k8s.io/v1"
@@ -660,7 +660,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: datadog-cluster-agent
-    namespace: default
+    namespace: monitoring
 ---
 # Source: datadog/templates/cluster-agent-rbac.yaml
 apiVersion: "rbac.authorization.k8s.io/v1"
@@ -668,7 +668,7 @@ kind: Role
 metadata:
   labels: {}
   name: datadog-cluster-agent-main
-  namespace: default
+  namespace: monitoring
 rules:
   - apiGroups: [""]
     resources: ["secrets"]
@@ -680,7 +680,7 @@ kind: RoleBinding
 metadata:
   labels: {}
   name: "datadog-cluster-agent-main"
-  namespace: default
+  namespace: monitoring
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -688,14 +688,14 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: datadog-cluster-agent
-    namespace: default
+    namespace: monitoring
 ---
 # Source: datadog/templates/agent-services.yaml
 apiVersion: v1
 kind: Service
 metadata:
   name: datadog-cluster-agent
-  namespace: default
+  namespace: monitoring
   labels: {}
 spec:
   type: ClusterIP
@@ -711,7 +711,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: datadog-cluster-agent-admission-controller
-  namespace: default
+  namespace: monitoring
   labels:
     app: "datadog"
     chart: "datadog-3.3.1"
@@ -729,7 +729,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: datadog
-  namespace: default
+  namespace: monitoring
   labels: {}
 spec:
   revisionHistoryLimit: 10
@@ -1354,7 +1354,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: datadog-cluster-agent
-  namespace: default
+  namespace: monitoring
   labels: {}
 spec:
   replicas: 1

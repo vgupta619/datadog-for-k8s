@@ -20,7 +20,7 @@ metadata:
   labels: {}
 type: Opaque
 data:
-  api-key: NWY5NGE2YTE5NjgwNjc3NGI2NGQyMDdmNWMwOTU0YzY=
+  api-key: <<<<NWY5NGE2YTE5NjgwNjc3NGI2NGQyMDdmNWMwOTU0YzY=>>>>>
 ---
 # Source: datadog/templates/secret-cluster-agent-token.yaml
 apiVersion: v1

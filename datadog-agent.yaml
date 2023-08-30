@@ -1388,6 +1388,12 @@ spec:
               name: agentmetrics
               protocol: TCP
           env:
+            - name: DD_HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: DD_KUBELET_TLS_VERIFY
+              value: "false"          
             - name: DD_HEALTH_PORT
               value: "5556"
             - name: DD_API_KEY
